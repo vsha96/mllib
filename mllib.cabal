@@ -1,0 +1,100 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           mllib
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/vsha96/mllib#readme>
+homepage:       https://github.com/vsha96/mllib#readme
+bug-reports:    https://github.com/vsha96/mllib/issues
+author:         Ivan Shulyugin
+maintainer:     vsha96@yandex.ru
+copyright:      Copyright (c) 2022 Ivan Shulyugin
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/vsha96/mllib
+
+library
+  exposed-modules:
+      Mllib
+      Mllib.Classification.KNN
+      Mllib.Classification.NearestCentroid
+      Mllib.Classification.SVM
+      Mllib.Cluster.KMeans
+      Mllib.Metrics
+      Mllib.Model
+      Mllib.Regression.KNN
+      Mllib.Regression.Ridge
+      Mllib.Regression.Robust
+      Mllib.Regression.SVM
+      Mllib.Tree.Decision
+      Mllib.Tree.RandomForest
+      Mllib.Types
+      Mllib.Utils.CSV
+      Mllib.Utils.Features
+      Mllib.Utils.ModelSelection
+  other-modules:
+      Paths_mllib
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , csv
+    , directory
+    , hmatrix
+    , parsec
+    , random
+  default-language: Haskell2010
+
+executable mllib-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_mllib
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , csv
+    , directory
+    , hmatrix
+    , mllib
+    , parsec
+    , random
+  default-language: Haskell2010
+
+test-suite mllib-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_mllib
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , cassava
+    , containers
+    , csv
+    , directory
+    , hmatrix
+    , mllib
+    , parsec
+    , random
+  default-language: Haskell2010

@@ -1,0 +1,56 @@
+name:                mllib
+version:             0.1.0.0
+github:              "vsha96/mllib"
+license:             BSD3
+author:              "Ivan Shulyugin"
+maintainer:          "vsha96@yandex.ru"
+copyright:           "Copyright (c) 2022 Ivan Shulyugin"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/vsha96/mllib#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- random
+- hmatrix
+- containers # Data.Tree
+- csv
+- cassava
+- parsec
+- bytestring
+- directory # for tests
+
+library:
+  source-dirs: src
+
+executables:
+  mllib-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - mllib
+
+tests:
+  mllib-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - mllib

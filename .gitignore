@@ -21,3 +21,9 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+
+# IPYNB checkpoints
+**/.ipynb_checkpoints
+
+# System files
+**/.DS_Store
