@@ -33,7 +33,6 @@ library
       Mllib.Metrics
       Mllib.Model
       Mllib.Regression.KNN
-      Mllib.Regression.Ridge
       Mllib.Regression.Robust
       Mllib.Regression.SVM
       Mllib.Tree.Decision

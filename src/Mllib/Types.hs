@@ -4,7 +4,7 @@ module Mllib.Types
 
 import Data.Tree as Reexport (Tree, Forest)
 
-import Numeric.LinearAlgebra.Data    as Reexport (fromList, vector)
+import Numeric.LinearAlgebra.Data    as Reexport (fromList, toList, vector, size)
 import Numeric.LinearAlgebra.Data    as Reexport (Vector, R)
 
 -- TODO: replace it
