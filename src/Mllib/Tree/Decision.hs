@@ -44,6 +44,26 @@
 
 
 
+-- | Information for contributors
+--   TODO list:
+--
+-- 1) fix classification when predict a vector at the separation border
+--
+-- 2) add regression
+-- implement and use `mean` instead of `mode` to compute regression value
+-- 
+-- 3) see problem with equal values below in the code
+--
+-- 4) implement validation of tree parameters
+-- 
+-- 5) check functions for split:
+-- `makeSplit`
+--   `makeBestSplitsForFeatures`
+--     `generateFeatures`
+--     `findBestSplitByFeatureWithParams`
+
+
+
 module Mllib.Tree.Decision
     ( DecisionTreeParams(..)
     , DecisionTree
@@ -293,6 +313,7 @@ makeBestSplitsForFeatures
        ,([(Vector R, Int)] , [(Vector R, Int)]) -- ^ split or two groups where element is (vector, label)
        )] -- ^ list of splits for each feature
 makeBestSplitsForFeatures params uniqueClasses indices x y  
+    -- TODO: if there are several equal values then choose random
     = sortOn 
         (\(imp, index, split) -> imp) -- sort by impurity value
         [findBestSplitByFeatureWithParams i params uniqueClasses x y | i <- indices]
@@ -320,7 +341,9 @@ validateParams
     -> DecisionTreeParams
 validateParams params dimension
     -- TODO: add more checks for errors
-    | maxFeatures params == (-1)
+    | maxFeatures params == (-1) 
+    -- this means that maxFeatures is undefined
+    -- then take the square root of dimension
         = params{ maxFeatures=(truncate (sqrt (fromIntegral dimension))) }
     | maxFeatures params < 1
         = error "ERR: invalid params"
