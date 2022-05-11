@@ -6,7 +6,7 @@
 -- Example:
 --    fitDecisionTree treeSetup x y
 --
--- General example:
+-- General example 1:
 --   gen <- newStdGen
 --   let
 --     x =
@@ -35,6 +35,12 @@
 --     tree = fitDecisionTree treeSetup{rGen=gen, randomSplitter=True, minSamplesLeaf=1} x_train y
 --   print $ tree
 --   print $ predict tree x_test
+--
+-- Example 2:
+--    x = [[1], [2], [3], [4]]
+--    y = [0, 1, 2, 3]
+--    tree = fitDecisionTree treeSetup (map vector x) y
+--    predict tree (map vector [[0], [1.6], [3.3], [10]])
 
 
 
@@ -351,6 +357,9 @@ generateFeatures params prevIndex dimension
         = takeUniqueIndices
             (maxFeatures params)
             (randomRs (0, dimension - 1) (rGen params))
+    | dimension == 1
+        -- then split by the same feature index, it is 0
+        = [0]
     | maxFeatures params == dimension 
         -- then take all indices except the previous
         = filter (/= prevIndex) $ [0..(dimension-1)]
