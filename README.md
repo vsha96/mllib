@@ -1,11 +1,8 @@
 # mllib
 
-## Machine learning library
-It is still in active development.  
+## Machine learning library in Haskell
 
 Documentation will be available soon!  
-
-We welcome experienced haskell programmers who will make comments and suggestions!  
 
 ## Installation and run
 - download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)
@@ -13,8 +10,20 @@ We welcome experienced haskell programmers who will make comments and suggestion
 - in the directory of package  
 `stack run`
 
+## Available models
+
+Clustering:
+- `Mllib.Cluster.KMeans`
+
+Classification:
+- `Mllib.Classification.NearestCentroid`
+- `Mllib.Classification.KNN`
+
+Trees:
+- `Mllib.Tree.Decision` *classification only*
+
 ## Contributing
 
-Pull requests, bug reports, and feature requests are welcome. Please
+Any help is welcome! Please
 make sure to read [the contributor guidelines](CONTRIBUTING.md) before
 opening a new issue.
