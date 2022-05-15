@@ -1,6 +1,6 @@
 ---
 name: New model
-about: Describe a model.
+about: Describe a model
 title: "[MODEL] write the path to the model"
 labels: New model
 assignees: ''
