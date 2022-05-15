@@ -16,5 +16,5 @@ We welcome experienced haskell programmers who will make comments and suggestion
 ## Contributing
 
 Pull requests, bug reports, and feature requests are welcome. Please
-make sure to read [the contributor guidelines](CONTRIBUTING.md) before
+make sure to read [the contributor guidelines](./CONTRIBUTING.md) before
 opening a new issue.
