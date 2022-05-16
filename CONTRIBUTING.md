@@ -20,7 +20,7 @@ Issues, questions, bugs and features are in the [issue tracker](https://github.c
 
     5) Help others in the issue tracker.
 
-If you haven't found the right template, use `New feature` template. We willadd it or help you to find the most suitable!
+If you haven't found the right template, use `New feature` template. We will add it or help you to find the most suitable!
 
 ## See an empty file in `/src`?
 
