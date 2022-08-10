@@ -156,8 +156,8 @@ fitDecisionTree
 fitDecisionTree params x y 
     = buildDecisionTree 
         (validateParams params dimension) 
-        1{-current depth-} 
-        (-1){-feature index-} 
+        1    {-current depth-} 
+        (-1) {-feature index-} 
         x 
         y
   where
