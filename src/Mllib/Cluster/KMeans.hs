@@ -1,3 +1,33 @@
+-- | Implementation of KMeans
+-- Paramaters could be changed in `KMeansParams`
+-- For quick setup use `kmeansSetup` when fitting
+-- Example:
+--    fitKMeans kmeansSetup x
+-- To get labels or clusters use:
+--    
+-- !!! KMeans runs only once
+-- See more info in the issue tracker on GitHub
+-- 
+-- General example of usage:
+-- let
+--   x = [[1, 2]
+--       ,[1, 4]
+--       ,[1, 0]
+--       ,[10, 2]
+--       ,[10, 4]
+--       ,[10, 0]]
+--   x_train = map vector x
+--   model = fitKMeans kmeansSetup{rGen=gen, clusterNumber = 2} x_train
+-- putStr "Model: "
+-- print $ model
+-- putStr "Prediction: "
+-- print $ labels $ model
+-- 
+-- For taking labels use:
+--    labels model
+-- For taking centers of clusters use:
+--    cluster model
+
 module Mllib.Cluster.KMeans
     ( KMeansParams(..)
     , KMeans (labels, clusterCenters) 
