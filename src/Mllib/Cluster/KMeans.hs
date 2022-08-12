@@ -1,11 +1,14 @@
 module Mllib.Cluster.KMeans
-    ( Kmeans (labels, clusterCenters)
-    , kmeans
+    ( KMeansParams(..)
+    , KMeans (labels, clusterCenters) 
+    , kmeansSetup
+    , fitKMeans
     ) where
 
 import Mllib.Types
+import Mllib.Metrics (euclideanDistance)
 
-import System.Random (StdGen, randomRs)
+import System.Random (StdGen, mkStdGen, randomRs)
 
 import Data.Foldable (foldMap)
 import Data.List (elemIndices)
@@ -13,35 +16,74 @@ import Data.Monoid (Sum(..))
 
 
 
--- | Kmeans data type
-data Kmeans = Kmeans
-  { rGen           :: !StdGen     -- ^ Random generator
-  , labels         :: ![Int]      -- ^ Indices of each point
-  , clusterCenters :: ![Vector R] -- ^ Coordinates of cluster centers
-  }
+-- TODO
+--    add setup params to KMeans type
+--    add `fit` and `predict` funcs
+--    add add metrics
+
+
+
+-- | ============================
+-- | ======== Data types ========
+-- | ============================
+
+-- | KMeans parameters for setup
+data KMeansParams = KMeansParams
+    { rGen            :: !StdGen  -- ^ Random generator
+    , clusterNumber   :: !Int     -- ^ Number of clusters
+    }
+  deriving Show
+
+-- | KMeans data type
+data KMeans = KMeans
+    { params         :: !KMeansParams -- ^ Parameters
+    , labels         :: ![Int]        -- ^ Indices of each point
+    , clusterCenters :: ![Vector R]   -- ^ Coordinates of cluster centers
+    }
   deriving Show
 
 
 
-{- | Kmeans main function.
-     Returns type 'Kmeans' with labels and cluster centers inside.
--}
-kmeans
-    :: [Vector R] -- ^ List of vectors of double
-    -> Int        -- ^ Number of clusters
-    -> StdGen     -- ^ RandomGen
-    -> Kmeans
-kmeans list numOfClust gen = Kmeans gen labels clusterCenters
-  where
+-- | ================================
+-- | ======== Main functions ========
+-- | ================================
+
+-- | Default parameters for KMeans
+kmeansSetup :: KMeansParams
+kmeansSetup 
+    = KMeansParams
+        { rGen           = mkStdGen 42
+        , clusterNumber  = 3
+        }
+
+-- | KMeans fit function.
+-- Returns type 'KMeans' with labels and cluster centers inside.
+fitKMeans
+    :: KMeansParams -- ^ KMeans parameters
+    -> [Vector R]   -- ^ List of vectors of double
+    -> KMeans
+fitKMeans params list = 
+  let
+    gen        = rGen          params
+    numOfClust = clusterNumber params
     randomSeqOfIndices = randomRs (0, (length list) - 1) gen
     randomClusterIndices = takeUniqueIndices numOfClust randomSeqOfIndices
     initClusters = [list !! i | i <- randomClusterIndices]
     initLabels = assignIndices initClusters list
     (labels, clusterCenters) = kmeansLoopWithoutEps list initLabels
+  in
+    KMeans params labels clusterCenters
+  where
+    
 
-{- | Kmeans loop with manual error estimation.
-     Returns labels and cluster centers as a tuple.
--}
+
+
+-- | ====================================
+-- | ======== Internal functions ========
+-- | ====================================
+
+-- | KMeans loop with manual error estimation.
+-- Returns labels and cluster centers as a tuple.
 kmeansLoop
     :: [Vector R] -- ^ Vectors
     -> [Vector R] -- ^ Old cluster centers
@@ -54,10 +96,9 @@ kmeansLoop list oldCenters eps
     labels = assignIndices list oldCenters
     newCenters = computeClusters labels list 
     
-{- | Runs kmeans loop until stabilization of clusters.
-     Returns labels and cluster centers as a tuple.
-     Stops when lists of labels become equal.
--}
+-- | Runs kmeans loop until stabilization of clusters.
+-- Returns labels and cluster centers as a tuple.
+-- Stops when lists of labels become equal.
 kmeansLoopWithoutEps
     :: [Vector R]          -- ^ Vectors
     -> [Int]               -- ^ Old labels
@@ -91,9 +132,15 @@ assignIndices
     -> [Int]
 assignIndices clusterCenters list = 
     map ((\listOfDists -> head $ elemIndices (minimum listOfDists) listOfDists) .
-        map norm_2 . 
-        zipWith (-) clusterCenters .
-        replicate (length clusterCenters)) list
+        zipWith euclideanDistance clusterCenters .
+        replicate (length clusterCenters)) 
+        list
+
+
+
+-- | ===================================
+-- | ======== Support functions ========
+-- | ===================================
 
 {- | Support function. Returns unique indices from infinite sequence.
      !!! May get stuck in an infinite loop,
