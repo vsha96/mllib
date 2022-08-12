@@ -54,7 +54,7 @@
 -- 
 -- 3) see problem with equal values below in the code
 --
--- 4) implement validation of tree parameters
+-- 4) implement validation of tree parameters and validation of the data
 -- 
 -- 5) check functions for split:
 -- `makeSplit`
