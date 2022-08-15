@@ -1,11 +1,15 @@
 ## Basic principles when implementing a model:  
 
-**TL;DR**
+**TL;DR**:
 Open [the decision tree model](https://github.com/vsha96/mllib/blob/main/src/Mllib/Tree/Decision.hs) and write in a similar style
 
-----------
+------------
 
-The data should be processed as vectors from the package [hmatrix](https://hackage.haskell.org/package/hmatrix). Import of this data type and several functions were made in [Mllib/Types.hs](https://github.com/vsha96/mllib/blob/main/src/Mllib/Types.hs)
+The **models are divided** by tasks or by structure (see [src/Mllib](https://github.com/vsha96/mllib/tree/main/src/Mllib)).
+There are also support modules.
+
+
+The **data should be processed** as vectors from the package [hmatrix](https://hackage.haskell.org/package/hmatrix). Import of this data type and several functions were made in [Mllib/Types.hs](https://github.com/vsha96/mllib/blob/main/src/Mllib/Types.hs)
 
 General code style is [here](https://kowainik.github.io/posts/2019-02-06-style-guide)
 
@@ -138,6 +142,10 @@ Maybe you wrote and debugged a function that later turned out to be unnecessary,
 
 ...
 ```
+
+------------
+
+#### If you see that these rules need to be improved, be free to open a ticket in the [issue tracker](https://github.com/vsha96/mllib/issues)
 
 
 

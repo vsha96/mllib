@@ -28,7 +28,7 @@ Implement the model or functions!
 
 See more info in the [issue tracker](https://github.com/vsha96/mllib/issues). If you don't see a ticket for this file, add it according to the `New model` or `New feature` template.
 
-#### Basic principles when implementing a model:  
+## Basic principles when implementing a model
 [see the principles in the HOW-TO-WRITE-MODEL.md](https://github.com/vsha96/mllib/HOW_TO_WRITE_MODEL.md)
 
 ## Found a bug?
