@@ -53,6 +53,7 @@ library
     , csv
     , directory
     , hmatrix
+    , hspec
     , parsec
     , random
   default-language: Haskell2010
@@ -72,6 +73,7 @@ executable mllib-exe
     , csv
     , directory
     , hmatrix
+    , hspec
     , mllib
     , parsec
     , random
@@ -93,6 +95,7 @@ test-suite mllib-test
     , csv
     , directory
     , hmatrix
+    , hspec
     , mllib
     , parsec
     , random

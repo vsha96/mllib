@@ -29,6 +29,7 @@ dependencies:
 - parsec
 - bytestring
 - directory # for tests
+- hspec # A Testing Framework for Haskell
 
 library:
   source-dirs: src
