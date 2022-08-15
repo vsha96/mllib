@@ -47,9 +47,7 @@ import Data.Monoid (Sum(..))
 
 
 -- TODO
---    add setup params to KMeans type
---    add `fit` and `predict` funcs
---    add add metrics
+--    add metrics
 
 
 
