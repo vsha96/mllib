@@ -2,9 +2,8 @@ module Mllib.Utils.Features
     ( countFeatures
     ) where
 
-{- | Generalized function based on 'Eq' classes.
-     Returns number and labels of features seen.
--}
+-- | Generalized function based on 'Eq' classes.
+-- Returns number and labels of features seen.
 countFeatures
     :: (Eq a)
     => [a]        -- ^ Labels
