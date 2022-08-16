@@ -1,5 +1,7 @@
 module Mllib.Utils.Features
     ( countFeatures
+    , takeUniqueElems
+    , equalGroups
     ) where
 
 -- | Generalized function based on 'Eq' classes.
