@@ -1,6 +1,6 @@
-# mllib
+## Mllib -- Machine learning library in Haskell
 
-## Machine learning library in Haskell
+The collection of machine learning algorithms that allows developers to stay within the Haskell language.
 
 Documentation will be available soon!  
 
