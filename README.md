@@ -6,6 +6,7 @@ Documentation will be available soon!
 
 ## Installation and run
 - download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)
+- download the latest version of **Mllib**
 - try to use available models in **app/Main.hs**
 - in the directory of package  
 `stack run`
