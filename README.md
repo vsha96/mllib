@@ -5,10 +5,12 @@ The collection of machine learning algorithms that allows developers to stay wit
 Documentation will be available soon!  
 
 ## Installation and run
-- download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)
-- download the latest version of this library
+- download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)  
+`curl -sSL https://get.haskellstack.org/ | sh`
+- download the latest version of this library  
+`git clone git@github.com:vsha96/mllib.git`
 - try to use available models in [app/Main.hs](https://github.com/vsha96/mllib/blob/main/app/Main.hs)
-- in the directory of package
+- in the directory of package  
 `stack run`
 
 ## Available models
