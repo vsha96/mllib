@@ -26,6 +26,7 @@ Trees:
 
 #### Example of usage:
 ```haskell
+-- file app/Main.hs
 import Mllib.Types
 import Mllib.Tree.Decision
 ...
@@ -44,6 +45,8 @@ main = do
 ```
 Output:  
 ```Predict: [0,0,2,2]```
+
+See more examples in [app/Main.hs]()
 
 
 ## Contributing

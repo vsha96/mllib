@@ -8,14 +8,13 @@ import Mllib.Metrics
 
 
 -- | Available models
--- remove comments from the desired model 
+-- remove comments from one (to avoid conflicts) desired model 
 -- in the import block below and in `main` function
 
 import Mllib.Tree.Decision as DT
 -- import Mllib.Classification.KNN as KNN
 -- import Mllib.Classification.NearestCentroid as NC
 -- import Mllib.Cluster.KMeans as KM
-
 
 main :: IO ()
 main = do 
@@ -33,7 +32,7 @@ main = do
   putStr "Model: "
   print $ modelDTree
   putStr $ "Predict " ++ (show x_test) ++ ": "
-  print $ DT.predict modelDTree x_test
+  print $ predict modelDTree x_test
 
   -- | Example of KNN
   {-
