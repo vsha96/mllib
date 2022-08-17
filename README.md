@@ -13,16 +13,17 @@ Documentation will be available soon!
 
 ## Available models
 
+The models are divided by tasks or by structure (see [src/Mllib](https://github.com/vsha96/mllib/tree/main/src/Mllib)). There are also support modules.
+
 Clustering:
-- `Mllib.Cluster.KMeans`
+* [`Mllib.Cluster.KMeans`](https://github.com/vsha96/mllib/blob/main/src/Mllib/Cluster/KMeans.hs)
 
 Classification:
-- `Mllib.Classification.NearestCentroid`
-- `Mllib.Classification.KNN`
+* [`Mllib.Classification.NearestCentroid`](https://github.com/vsha96/mllib/blob/main/src/Mllib/Classification/NearestCentroid.hs)
+* [`Mllib.Classification.KNN`](https://github.com/vsha96/mllib/blob/main/src/Mllib/Classification/KNN.hs)
 
 Trees:
-- `Mllib.Tree.Decision` *classification only*
-
+* [`Mllib.Tree.Decision`](https://github.com/vsha96/mllib/blob/main/src/Mllib/Tree/Decision.hs) (classification only)
 
 #### Example of usage:
 ```haskell
