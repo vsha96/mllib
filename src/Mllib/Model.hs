@@ -1,3 +1,8 @@
+-- Description of the class `Model`
+-- 
+-- ! This is still not implemented and is not being used
+-- 
+
 module Mllib.Model
     ( ModelClassification(..)
     ) where
