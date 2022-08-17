@@ -4,6 +4,8 @@ module Mllib.Utils.Features
     , equalGroups
     ) where
 
+import Data.List (elemIndices)
+
 -- | Generalized function based on 'Eq' classes.
 -- Returns number and labels of features seen.
 countFeatures
