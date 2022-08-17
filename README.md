@@ -29,11 +29,9 @@ Trees:
 -- file app/Main.hs
 import Mllib.Types
 import Mllib.Tree.Decision
-...
 
 main :: IO ()
 main = do 
-    ...
   let
     x = [[1], [2], [3], [4]]
     y = [0, 0, 2, 2]
