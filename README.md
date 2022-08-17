@@ -6,9 +6,9 @@ Documentation will be available soon!
 
 ## Installation and run
 - download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)
-- download the latest version of **Mllib**
-- try to use available models in **app/Main.hs**
-- in the directory of package  
+- download the latest version of this library
+- try to use available models in [app/Main.hs](https://github.com/vsha96/mllib/blob/main/app/Main.hs)
+- in the directory of package
 `stack run`
 
 ## Available models
@@ -22,6 +22,29 @@ Classification:
 
 Trees:
 - `Mllib.Tree.Decision` *classification only*
+
+
+#### Example of usage:
+```haskell
+import Mllib.Types
+import Mllib.Tree.Decision
+...
+
+main :: IO ()
+main = do 
+    ...
+  let
+    x = [[1], [2], [3], [4]]
+    y = [0, 0, 2, 2]
+    x_train = map vector x
+    x_test  = map vector [[0], [1.8], [3.3], [10]]
+    modelDTree = fitDecisionTree treeSetup x_train y
+  putStr "Predict: "
+  print $ predict modelDTree x_test
+```
+Output:  
+```Predict: [0,0,2,2]```
+
 
 ## Contributing
 
