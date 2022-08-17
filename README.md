@@ -46,7 +46,7 @@ main = do
 Output:  
 ```Predict: [0,0,2,2]```
 
-See more examples in [app/Main.hs]()
+#### See more examples in [app/Main.hs](https://github.com/vsha96/mllib/blob/main/app/Main.hs#L10)
 
 
 ## Contributing
