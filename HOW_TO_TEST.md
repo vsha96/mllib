@@ -9,7 +9,7 @@ The [HSpec](http://hspec.github.io/) framework is used for testing with the conv
 e.g.:
 see `src/Mllib/Classification/SVM.hs` -> add `test/Mllib/Classification/SVMSpec.hs`
 
-2) Define module and write tests (Look at the existing spec files in the `/test` and write in the same way)
+2) Define module and write tests (Look at the existing spec files in the `/test/Mllib` and write in the same way)
 
 3) Import the module in the `/test/Spec.hs` and describe the test case
 ```haskell

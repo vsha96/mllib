@@ -143,6 +143,14 @@ Maybe you wrote and debugged a function that later turned out to be unnecessary,
 ...
 ```
 
+
+
+## Testing
+
+[See how to test in the HOW-TO-TEST.md](https://github.com/vsha96/mllib/blob/main/HOW_TO_TEST.md)
+
+
+
 ------------
 
 #### If you see that these rules need to be improved, be free to open a ticket in the [issue tracker](https://github.com/vsha96/mllib/issues)
