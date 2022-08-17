@@ -1,3 +1,7 @@
+-- | Module for CSV files processing
+-- !!! serious improvements are required
+-- use at your own risk
+
 module Mllib.Utils.CSV
     ( extractDataFromCSV
     , saveLabelsToCSV
@@ -47,3 +51,10 @@ toInt = read
 -- or a function which returns [(String {- header -}, String)]
 --      lookup in this list
 --      and after this we can transform data
+
+-- | Place code below in Main.hs to extract data from csv
+{-
+-- | For csv processing if use Mllib.Utils.CSV
+handleError csv = error "ERR: Mllib.Utils.CSV : parse error"
+process = convertToVector . init . tail
+-}
