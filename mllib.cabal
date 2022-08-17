@@ -83,6 +83,10 @@ test-suite mllib-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Mllib.Classification.KNNSpec
+      Mllib.Classification.NearestCentroidSpec
+      Mllib.Cluster.KMeansSpec
+      Mllib.Tree.DecisionSpec
       Paths_mllib
   hs-source-dirs:
       test
