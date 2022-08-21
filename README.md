@@ -9,6 +9,7 @@ Documentation will be available soon!
     - Dependencies:
         - [LAPACK](https://github.com/Reference-LAPACK/lapack)
         - [BLAS](https://netlib.org/blas/)
+        - [GSL](https://www.gnu.org/software/gsl/)
     - They should be available for most of the popular distros, using default packgage managers for the platform
         - For macOS you can use [Homebrew](https://brew.sh/): run `brew install openblas lapack`
         - For Debian-based distros (such as Ubuntu) you could use `sudo apt-get install libblas-dev liblapack-dev` ([more info](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries))
