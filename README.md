@@ -12,7 +12,7 @@ Documentation will be available soon!
         - [GSL](https://www.gnu.org/software/gsl/)
     - They should be available for most of the popular distros, using default packgage managers for the platform
         - For macOS you can use [Homebrew](https://brew.sh/): run `brew install openblas lapack`
-        - For Debian-based distros (such as Ubuntu) you could use `sudo apt-get install libblas-dev liblapack-dev` ([more info](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries))
+        - For Debian-based distros (such as Ubuntu) you could use `sudo apt-get install libblas-dev liblapack-dev libgsl-dev` ([more info](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries))
         - For Arch Linux / distros based on it `pacman -S blas lapack gsl` just solves it
 2. Download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)  
 `curl -sSL https://get.haskellstack.org/ | sh`
