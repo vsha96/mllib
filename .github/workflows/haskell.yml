@@ -17,7 +17,7 @@ jobs:
       
       - name: Setup Stack
         run: |
-          curl -sSL https://get.haskellstack.org/ | sh
+          curl -sSL https://get.haskellstack.org/ | sh -s - -f
 
       - name: Start build
         run: stack build
