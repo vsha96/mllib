@@ -42,28 +42,6 @@
 --    tree = fitDecisionTree treeSetup (map vector x) y
 --    predict tree (map vector [[0], [1.6], [3.3], [10]])
 
-
-
--- | Information for contributors
---   TODO list:
---
--- 1) fix classification when predict a vector at the separation border
---
--- 2) add regression
--- implement and use `mean` instead of `mode` to compute regression value
--- 
--- 3) see problem with equal values below in the code
---
--- 4) implement validation of tree parameters and validation of the data
--- 
--- 5) check functions for split:
--- `makeSplit`
---   `makeBestSplitsForFeatures`
---     `generateFeatures`
---     `findBestSplitByFeatureWithParams`
-
-
-
 module Mllib.Tree.Decision
     ( DecisionTreeParams(..)
     , DecisionTree
