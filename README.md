@@ -5,22 +5,15 @@ The collection of machine learning algorithms that allows developers to stay wit
 Documentation will be available soon!  
 
 ## Installation and run
-1. Make sure you have the required dependencies installed
-    - Dependencies:
-        - [LAPACK](https://github.com/Reference-LAPACK/lapack)
-        - [BLAS](https://netlib.org/blas/)
-        - [GSL](https://www.gnu.org/software/gsl/)
-    - They should be available for most of the popular distros, using default packgage managers for the platform
-        - For macOS you can use [Homebrew](https://brew.sh/): run `brew install openblas lapack gsl`
-        - For Debian-based distros (such as Ubuntu) you could use `sudo apt-get install libblas-dev liblapack-dev libgsl-dev` ([more info](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries))
-        - For Arch Linux / distros based on it `pacman -S blas lapack gsl` just solves it
-2. Download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)  
+1. Download and install [the Haskell Tool Stack](https://docs.haskellstack.org/en/stable/README/#how-to-install)  
 `curl -sSL https://get.haskellstack.org/ | sh`
-3. Clone the repository to download the latest version of this library
+2. Clone the repository to download the latest version of this library  
 `git clone git@github.com:vsha96/mllib.git`
-4. First things to try out:
+3. First things to try out:
     - try to use available models in [app/Main.hs](https://github.com/vsha96/mllib/blob/main/app/Main.hs)
     - in the directory of package `stack run`
+
+See [troubleshooting installation issues](https://github.com/vsha96/mllib/blob/main/docs/INSTALLATION_TROUBLESHOOTING.md)
 
 ## Available models
 
