@@ -29,11 +29,11 @@ Implement the model or functions!
 See more info in the [issue tracker](https://github.com/vsha96/mllib/issues). If you don't see a ticket for this file, add it according to the `New model` or `New feature` template.
 
 ## Basic principles when implementing a model
-[See the principles in the HOW-TO-WRITE-MODEL.md](https://github.com/vsha96/mllib/blob/main/HOW_TO_WRITE_MODEL.md)
+[See the principles in the HOW-TO-WRITE-MODEL.md](https://github.com/vsha96/mllib/blob/main/docs/HOW_TO_WRITE_MODEL.md)
 
 ## Testing
 
-[See how to test in the HOW-TO-TEST.md](https://github.com/vsha96/mllib/blob/main/HOW_TO_TEST.md)
+[See how to test in the HOW-TO-TEST.md](https://github.com/vsha96/mllib/blob/main/docs/HOW_TO_TEST.md)
 
 ## Found a bug?
 
