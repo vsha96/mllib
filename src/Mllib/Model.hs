@@ -3,6 +3,10 @@
 -- ! This is still not implemented and is not being used
 -- 
 
+-- TODO
+--   there is a need to unify all models via single interface
+--   ? class for models can help ?
+
 module Mllib.Model
     ( ModelClassification(..)
     ) where
