@@ -1,5 +1,7 @@
 ## Mllib: Machine learning library in Haskell
 
+[ANNOUNCEMENT FROM THE AUTHOR](https://github.com/vsha96/mllib/issues/23)
+
 The collection of machine learning algorithms that allows developers to stay within the Haskell language.
 
 Documentation will be available soon!  
