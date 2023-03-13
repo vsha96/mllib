@@ -17,19 +17,16 @@ import Mllib.Metrics (Metric)
 import Mllib.Classification.KNN
 import Mllib.Classification.NearestCentroid
 
-
+-- TODO: refactor interface when NearestCentroid is also remade with config
 
 class ModelClassification model where
     predict :: model -> Metric -> [Vector R] -> [Int]
 
-
-
 instance ModelClassification KNeighbors where
-    predict = 
-        Mllib.Classification.KNN.predict
+    predict = Mllib.Classification.KNN.predict
 
-instance ModelClassification NearestCentroid where
-    predict = 
-        Mllib.Classification.NearestCentroid.predict
-
+-- instance ModelClassification NearestCentroid where
+--     predict = 
+--         Mllib.Classification.NearestCentroid.predict
+--
 

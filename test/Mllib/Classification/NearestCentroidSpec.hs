@@ -15,7 +15,8 @@ spec = do
     y = [0, 0, 1, 1]
     x_train = map vector x
     -- fitting model
-    nc = fitNearestCentroid x_train y
+    params = NearestCentroidParams { distanceMetric=euclideanDistance }
+    nc = fitNearestCentroid params x_train y
     -- tests
     x_test0 = map vector [[1.1]]
     x_test1 = map vector [[-10], [-20]]
@@ -23,6 +24,6 @@ spec = do
 
   describe "NearestCentroid" $ do
     it "performs classification" $ do
-      (predict nc euclideanDistance x_test0) `shouldBe` [0]
-      (predict nc euclideanDistance x_test1) `shouldBe` [0, 0]
-      (predict nc euclideanDistance x_test2) `shouldBe` [1, 1]
+      (predict nc x_test0) `shouldBe` [0]
+      (predict nc x_test1) `shouldBe` [0, 0]
+      (predict nc x_test2) `shouldBe` [1, 1]
