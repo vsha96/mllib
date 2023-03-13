@@ -10,7 +10,9 @@ import Mllib.Types
 
 import Numeric.LinearAlgebra (cmap, sumElements, maxElement)
 
-type Metric = (Vector R) -> (Vector R) -> R
+-- TODO: add instance show? but how?
+-- maybe change Metric to data (enum-like), so that we can provide additional context
+type Metric = (Vector R) -> (Vector R) -> R 
 
 euclideanDistance :: Metric
 euclideanDistance v1 v2 = (sumElements (cmap (**2) (v1 - v2))) ** (1/2)

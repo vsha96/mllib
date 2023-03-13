@@ -1,5 +1,6 @@
 module Mllib.Classification.KNN
     ( KNeighbors
+    , KNeighborsParams
     , fitKNeighbors
     , predict
     ) where
@@ -11,7 +12,11 @@ import Mllib.Utils.Features (countFeatures)
 import Data.List (maximumBy, sortBy)
 import Data.Ord (comparing)
 
-
+-- | KNeighbors configuration
+data KNeighborsParams = KNeighborsParams
+    { numNeighbors  :: Int      -- ^ Number of neighbors
+    , metric        :: Metric   -- ^ Distance metric
+    }
 
 -- | KNearestNeighbors data type
 data KNeighbors = KNeighbors
@@ -24,9 +29,8 @@ data KNeighbors = KNeighbors
 
   -- TODO
   -- , weights        :: ???      -- ^ 
-  -- , metric         :: !Metric  -- ^ Metric
+  , distanceMetric :: !Metric  -- ^ Metric
   }
-  deriving Show
 
 
 
@@ -34,11 +38,11 @@ data KNeighbors = KNeighbors
      Returns type 'KNeighbors' with extracted features inside.
 -}
 fitKNeighbors
-    :: Int        -- ^ Number of neighbors
+    :: KNeighborsParams
     -> [Vector R] -- ^ List of vectors
     -> [Int]      -- ^ Labels of vectors
     -> KNeighbors
-fitKNeighbors k vectors labels =
+fitKNeighbors params vectors labels =
   let
     (featureNumber, uniqueFeatures) = countFeatures labels
     vectorNumber = length labels
@@ -47,9 +51,10 @@ fitKNeighbors k vectors labels =
       { featureNumber  = featureNumber
       , uniqueFeatures = uniqueFeatures
       , vectorNumber   = vectorNumber
-      , neighborNumber = k
       , vectors        = vectors
       , labels         = labels
+      , neighborNumber = numNeighbors params
+      , distanceMetric = metric params
       }
 
 {- | KNN predict function.
@@ -58,10 +63,9 @@ fitKNeighbors k vectors labels =
 -}
 predict
     :: KNeighbors  -- ^ NearestCentroid type after fitNearestCentroid
-    -> Metric      -- ^ Metric from Mllib.Metrics
     -> [Vector R]  -- ^ List of vectors to classify
     -> [Int]
-predict knn distance list =
+predict knn list =
   let 
     classes      = uniqueFeatures knn
     numOfVectors = vectorNumber knn
@@ -78,7 +82,7 @@ predict knn distance list =
         . take k -- take k minimal distances (k nearest neighbors)
         . sortBy (comparing snd) -- sort distances
         . zip tags -- add labels
-        . zipWith distance objects -- compute distance 
+        . zipWith (distanceMetric knn) objects -- compute distance 
         . replicate numOfVectors -- prepare vector to calculate distance
                                  -- to each objected
     ) list
