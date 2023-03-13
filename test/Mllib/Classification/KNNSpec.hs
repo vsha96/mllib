@@ -14,8 +14,9 @@ spec = do
     x = [[0], [1], [2], [3]]
     y = [0, 0, 1, 1]
     x_train = map vector x
+    parameters = KNeighborsParams {neighborNumber=3, distanceMetric=euclideanDistance}
     -- fitting model
-    knn = fitKNeighbors 3 x_train y
+    knn = fitKNeighbors parameters x_train y
     -- tests
     x_test0 = map vector [[1.1]]
     x_test1 = map vector [[-10], [-20]]
@@ -23,6 +24,6 @@ spec = do
 
   describe "KNN" $ do
     it "performs classification" $ do
-      (predict knn euclideanDistance x_test0) `shouldBe` [0]
-      (predict knn euclideanDistance x_test1) `shouldBe` [0, 0]
-      (predict knn euclideanDistance x_test2) `shouldBe` [1, 1]
+      (predict knn x_test0) `shouldBe` [0]
+      (predict knn x_test1) `shouldBe` [0, 0]
+      (predict knn x_test2) `shouldBe` [1, 1]

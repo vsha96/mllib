@@ -1,6 +1,6 @@
 module Mllib.Classification.KNN
     ( KNeighbors
-    , KNeighborsParams
+    , KNeighborsParams(..)
     , fitKNeighbors
     , predict
     ) where
@@ -14,8 +14,8 @@ import Data.Ord (comparing)
 
 -- | KNeighbors configuration
 data KNeighborsParams = KNeighborsParams
-    { numNeighbors  :: Int      -- ^ Number of neighbors
-    , metric        :: Metric   -- ^ Distance metric
+    { neighborNumber  :: Int      -- ^ Number of neighbors
+    , distanceMetric  :: Metric   -- ^ Distance metric
     }
 
 -- | KNearestNeighbors data type
@@ -23,13 +23,12 @@ data KNeighbors = KNeighbors
   { featureNumber  :: !Int        -- ^ Number of features
   , uniqueFeatures :: ![Int]      -- ^ Names of unique features
   , vectorNumber   :: !Int        -- ^ Vector quantity
-  , neighborNumber :: !Int        -- ^ Number of neighbors
   , vectors        :: ![Vector R] -- ^ List of vectors
   , labels         :: ![Int]      -- ^ Labels of vectors
+  , params         :: KNeighborsParams
 
   -- TODO
   -- , weights        :: ???      -- ^ 
-  , distanceMetric :: !Metric  -- ^ Metric
   }
 
 
@@ -53,8 +52,7 @@ fitKNeighbors params vectors labels =
       , vectorNumber   = vectorNumber
       , vectors        = vectors
       , labels         = labels
-      , neighborNumber = numNeighbors params
-      , distanceMetric = metric params
+      , params         = params
       }
 
 {- | KNN predict function.
@@ -69,7 +67,8 @@ predict knn list =
   let 
     classes      = uniqueFeatures knn
     numOfVectors = vectorNumber knn
-    k            = neighborNumber knn
+    k            = neighborNumber $ params knn
+    metric       = distanceMetric $ params knn
     objects      = vectors knn
     tags         = labels knn
   in
@@ -82,7 +81,7 @@ predict knn list =
         . take k -- take k minimal distances (k nearest neighbors)
         . sortBy (comparing snd) -- sort distances
         . zip tags -- add labels
-        . zipWith (distanceMetric knn) objects -- compute distance 
+        . zipWith metric objects -- compute distance 
         . replicate numOfVectors -- prepare vector to calculate distance
                                  -- to each objected
     ) list
