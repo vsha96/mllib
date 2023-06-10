@@ -53,12 +53,12 @@ module Mllib.Tree.Decision
 import Mllib.Types
 import Mllib.Utils.Features (countFeatures)
 
-import Data.List (sortOn)
+import Data.List (sortOn, uncons)
 import System.Random (randomR, randomRs)
 
 
 -- | ============================
--- | ======== Data types ========
+-- | ======== Data types =======Vector R=
 -- | ============================
 
 -- | Decision tree parameters for setup
@@ -136,17 +136,18 @@ fitDecisionTree params x y
         (validateParams params dimension) 
         1    {-current depth-} 
         (-1) {-feature index-} 
-        x 
-        y
+        x_ 
+        y_
   where
     dimension = size $ head x
+    (x_, y_) = validateData x y -- TODO: in case of `_ = validateData x y` it won't work (maybe GHC optimization)
 
 -- Predict class labels for vectors
 predict
     :: DecisionTree     -- ^ Fitted decision tree
     -> [Vector R]       -- ^ Vectors
     -> [Int]            -- ^ Predicted labels for vectors
-predict tree x = map (predictElem tree) x
+predict tree x = map (predictElem tree) $ validateSamples x
 
 
 
@@ -443,7 +444,19 @@ buildDecisionTree params curDepth prevIndex x y
     (xLeft, yLeft) = unzip lGroup
     (xRight, yRight) = unzip rGroup
 
+validateSamples :: [Vector R] -> [Vector R]
+validateSamples x = case uncons x of
+    Just (h, t) ->
+        if all (\v -> size v == fstLength) t 
+            then x
+            else error "ERR: Input vectors have mismatching size"
+        where fstLength = size h 
+    Nothing -> x
 
+validateData :: [Vector R] -> [a] -> ([Vector R], [a])
+validateData x y 
+    | length x /= length y = error "ERR: Samples and labels lists do not match in length"
+    | otherwise = (validateSamples x, y)
 
 -- | ===================================
 -- | ======== Support functions ========

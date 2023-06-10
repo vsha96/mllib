@@ -5,6 +5,7 @@ import Test.Hspec
 import Mllib.Types
 
 import Mllib.Tree.Decision
+import Control.Exception (evaluate)
 
 spec :: Spec
 spec = do
@@ -24,3 +25,9 @@ spec = do
       (predict tree x_test0) `shouldBe` [0]
       (predict tree x_test1) `shouldBe` [1, 2]
       (predict tree x_test2) `shouldBe` [3]
+    it "should fail on mismatching sizes" $ do
+      let bad_x = map vector [[1, 2], [3], [4], [5]]
+      evaluate (fitDecisionTree treeSetup bad_x y) `shouldThrow` errorCall "ERR: Input vectors have mismatching size"
+      evaluate (predict tree bad_x) `shouldThrow` errorCall "ERR: Input vectors have mismatching size"
+      let bad_y = tail y
+      evaluate (fitDecisionTree treeSetup (map vector x) bad_y) `shouldThrow` errorCall "ERR: Samples and labels lists do not match in length"
