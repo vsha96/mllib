@@ -30,7 +30,7 @@
 
 module Mllib.Cluster.KMeans
     ( KMeansParams(..)
-    , KMeans (labels, clusterCenters) 
+    , KMeans (labels, clusterCenters)
     , kmeansSetup
     , fitKMeans
     ) where
@@ -57,9 +57,10 @@ import Data.Monoid (Sum(..))
 
 -- | KMeans parameters for setup
 data KMeansParams = KMeansParams
-    { rGen            :: !StdGen  -- ^ Random generator
-    , clusterNumber   :: !Int     -- ^ Number of clusters
-    }
+    { rGen            :: !StdGen    -- ^ Random generator
+    , clusterNumber   :: !Int       -- ^ Number of clusters
+    , maxIter         :: Maybe Int  -- ^ Maximum number of iterations
+    } -- TODO: add max iter implementation
   deriving Show
 
 -- | KMeans data type
@@ -78,10 +79,11 @@ data KMeans = KMeans
 
 -- | Default parameters for KMeans
 kmeansSetup :: KMeansParams
-kmeansSetup 
+kmeansSetup
     = KMeansParams
         { rGen           = mkStdGen 42
         , clusterNumber  = 3
+        , maxIter        = Nothing
         }
 
 -- | KMeans fit function.
@@ -90,19 +92,17 @@ fitKMeans
     :: KMeansParams -- ^ KMeans parameters
     -> [Vector R]   -- ^ List of vectors of double
     -> KMeans
-fitKMeans params list = 
+fitKMeans params list =
   let
-    gen        = rGen          params
+    gen = rGen          params
     numOfClust = clusterNumber params
-    randomSeqOfIndices = randomRs (0, (length list) - 1) gen
+    randomSeqOfIndices = randomRs (0, length list - 1) gen
     randomClusterIndices = takeUniqueIndices numOfClust randomSeqOfIndices
     initClusters = [list !! i | i <- randomClusterIndices]
     initLabels = assignIndices initClusters list
     (labels, clusterCenters) = kmeansLoopWithoutEps list initLabels
   in
     KMeans params labels clusterCenters
-  where
-    
 
 
 
@@ -122,8 +122,8 @@ kmeansLoop list oldCenters eps
     | otherwise = kmeansLoop list newCenters eps
   where
     labels = assignIndices list oldCenters
-    newCenters = computeClusters labels list 
-    
+    newCenters = computeClusters labels list
+
 -- | Runs kmeans loop until stabilization of clusters.
 -- Returns labels and cluster centers as a tuple.
 -- Stops when lists of labels become equal.
@@ -143,26 +143,24 @@ computeClusters
     :: [Int]      -- ^ Labels
     -> [Vector R] -- ^ Vectors
     -> [Vector R] -- ^ Centers of clusters
-computeClusters indices list = 
+computeClusters indices list =
     map (\(s, n) -> getSum s / getSum n) -- mean from the trick below
     [ foldMap (\x -> (Sum (snd x), Sum 1)) -- trick to count as (SumOfVecs, NumberOfVecs)
     $ filter (\tuple -> fst tuple == i) indexAndVector -- gather vectors by an index
     | i <- [0..(numOfClust-1)] ] -- compute for each cluster
   where
-    numOfClust = (maximum indices) + 1
-    indexAndVector = zipWith (\x y -> (x, y)) indices list
+    numOfClust = maximum indices + 1
+    indexAndVector = zip indices list
 
 -- TODO ?rewrite: elemIndices (minimum listOfDists) listOfDists)
 --             -> elemIndex (foldl1 min a) a
-assignIndices 
+assignIndices
     :: [Vector R] -- ^ Cluster centers
     -> [Vector R] -- ^ Vectors
     -> [Int]
-assignIndices clusterCenters list = 
-    map ((\listOfDists -> head $ elemIndices (minimum listOfDists) listOfDists) .
+assignIndices clusterCenters = map ((\listOfDists -> head $ elemIndices (minimum listOfDists) listOfDists) .
         zipWith euclideanDistance clusterCenters .
-        replicate (length clusterCenters)) 
-        list
+        replicate (length clusterCenters))
 
 
 
@@ -176,15 +174,15 @@ assignIndices clusterCenters list =
      more than total number of unique elements.
 -}
 takeUniqueIndices
-    :: Eq a 
+    :: Eq a
     => Int -- ^ Number of indices
     -> [a] -- ^ Sequence of random indices
-    -> [a] 
+    -> [a]
 takeUniqueIndices n list = takeUnique n list []
   where
-    takeUnique 0 xs ys = ys
+    takeUnique 0 _ ys = ys
     takeUnique n (x:xs) ys
-        | (elem x ys) = takeUnique n xs ys
+        | x `elem` ys = takeUnique n xs ys
         | otherwise   = takeUnique (pred n) xs (x:ys)
 
 

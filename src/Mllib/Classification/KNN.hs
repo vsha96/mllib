@@ -68,7 +68,7 @@ predict knn list =
     classes      = uniqueFeatures knn
     numOfVectors = vectorNumber knn
     k            = neighborNumber $ params knn
-    metric       = distanceMetric $ params knn
+    distance     = distanceMetric $ params knn
     objects      = vectors knn
     tags         = labels knn
   in
@@ -81,7 +81,7 @@ predict knn list =
         . take k -- take k minimal distances (k nearest neighbors)
         . sortBy (comparing snd) -- sort distances
         . zip tags -- add labels
-        . zipWith metric objects -- compute distance 
+        . zipWith distance objects -- compute distance 
         . replicate numOfVectors -- prepare vector to calculate distance
                                  -- to each objected
     ) list
