@@ -318,12 +318,11 @@ validateParams
     -> Int                -- ^ Dimension of vectors
     -> DecisionTreeParams
 validateParams params dimension
-    -- TODO: add more checks for errors
     | maxFeatures params == (-1) 
     -- this means that maxFeatures is undefined
     -- then take the square root of dimension
         = params{ maxFeatures=(truncate (sqrt (fromIntegral dimension))) }
-    | maxFeatures params < 1
+    | any (\f -> f params < 1) [maxFeatures, maxDepth, minSamplesLeaf, minSamplesSplit]
         = error "ERR: invalid params"
     | otherwise
         = params
