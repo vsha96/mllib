@@ -22,8 +22,8 @@ import Mllib.Classification.NearestCentroid
 class ModelClassification model where
     predict :: model -> Metric -> [Vector R] -> [Int]
 
-instance ModelClassification KNeighbors where
-    predict = Mllib.Classification.KNN.predict
+-- instance ModelClassification KNeighbors where
+--     predict = Mllib.Classification.KNN.predict
 
 -- instance ModelClassification NearestCentroid where
 --     predict = 
