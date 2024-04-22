@@ -1,5 +1,6 @@
 module Mllib.Classification.KNN
     ( KNeighbors
+    , KNeighborsParams(..)
     , fitKNeighbors
     , predict
     ) where
@@ -11,22 +12,24 @@ import Mllib.Utils.Features (countFeatures)
 import Data.List (maximumBy, sortBy)
 import Data.Ord (comparing)
 
-
+-- | KNeighbors configuration
+data KNeighborsParams = KNeighborsParams
+    { neighborNumber  :: Int      -- ^ Number of neighbors
+    , distanceMetric  :: Metric   -- ^ Distance metric
+    }
 
 -- | KNearestNeighbors data type
 data KNeighbors = KNeighbors
   { featureNumber  :: !Int        -- ^ Number of features
   , uniqueFeatures :: ![Int]      -- ^ Names of unique features
   , vectorNumber   :: !Int        -- ^ Vector quantity
-  , neighborNumber :: !Int        -- ^ Number of neighbors
   , vectors        :: ![Vector R] -- ^ List of vectors
   , labels         :: ![Int]      -- ^ Labels of vectors
+  , params         :: KNeighborsParams
 
   -- TODO
   -- , weights        :: ???      -- ^ 
-  -- , metric         :: !Metric  -- ^ Metric
   }
-  deriving Show
 
 
 
@@ -34,11 +37,11 @@ data KNeighbors = KNeighbors
      Returns type 'KNeighbors' with extracted features inside.
 -}
 fitKNeighbors
-    :: Int        -- ^ Number of neighbors
+    :: KNeighborsParams
     -> [Vector R] -- ^ List of vectors
     -> [Int]      -- ^ Labels of vectors
     -> KNeighbors
-fitKNeighbors k vectors labels =
+fitKNeighbors params vectors labels =
   let
     (featureNumber, uniqueFeatures) = countFeatures labels
     vectorNumber = length labels
@@ -47,9 +50,9 @@ fitKNeighbors k vectors labels =
       { featureNumber  = featureNumber
       , uniqueFeatures = uniqueFeatures
       , vectorNumber   = vectorNumber
-      , neighborNumber = k
       , vectors        = vectors
       , labels         = labels
+      , params         = params
       }
 
 {- | KNN predict function.
@@ -58,14 +61,14 @@ fitKNeighbors k vectors labels =
 -}
 predict
     :: KNeighbors  -- ^ NearestCentroid type after fitNearestCentroid
-    -> Metric      -- ^ Metric from Mllib.Metrics
     -> [Vector R]  -- ^ List of vectors to classify
     -> [Int]
-predict knn distance list =
+predict knn list =
   let 
     classes      = uniqueFeatures knn
     numOfVectors = vectorNumber knn
-    k            = neighborNumber knn
+    k            = neighborNumber $ params knn
+    distance     = distanceMetric $ params knn
     objects      = vectors knn
     tags         = labels knn
   in
