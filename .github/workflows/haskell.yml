@@ -6,17 +6,25 @@ permissions:
   contents: read
 
 jobs:
-  testing:
+  linting-and-testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Stack
         run: |
           curl -sSL https://get.haskellstack.org/ | sh -s - -f
 
+      - name: Install HLint (binary)
+        run: |
+          curl -sSL https://github.com/ndmitchell/hlint/releases/download/v3.8/hlint-3.8-x86_64-linux.tar.gz | tar xz
+          mv hlint-3.8/hlint /usr/local/bin/
+
+      - name: Run HLint
+        run: hlint .
+
       - name: Start build
         run: stack build
-        
+
       - name: Start tests
         run: stack test
