@@ -31,6 +31,13 @@ See more info in the [issue tracker](https://github.com/vsha96/mllib/issues). If
 ## Basic principles when implementing a model
 [See the principles in the HOW-TO-WRITE-MODEL.md](https://github.com/vsha96/mllib/blob/main/docs/HOW_TO_WRITE_MODEL.md)
 
+
+## Linter
+
+Install [hlint](https://github.com/ndmitchell/hlint): `stack install hlint`
+
+Run: `hlint .`
+
 ## Testing
 
 [See how to test in the HOW-TO-TEST.md](https://github.com/vsha96/mllib/blob/main/docs/HOW_TO_TEST.md)
