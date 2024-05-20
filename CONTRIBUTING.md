@@ -34,9 +34,9 @@ See more info in the [issue tracker](https://github.com/vsha96/mllib/issues). If
 
 ## Linter
 
-Install [hlint](https://github.com/ndmitchell/hlint): `stack install hlint`
+We are using [hlint](https://github.com/ndmitchell/hlint) to check the code.
 
-Run: `hlint .`
+To run the linter, use `make lint`.
 
 ## Testing
 

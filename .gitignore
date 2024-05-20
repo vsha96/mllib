@@ -27,3 +27,6 @@ cabal.project.local~
 
 # System files
 **/.DS_Store
+
+# Local files
+.local
