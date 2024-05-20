@@ -51,6 +51,7 @@ autofix-file: install-apply-refact
 	@$(HLINT) --refactor --refactor-options="--inplace" $(file)
 
 # Target to automatically apply hlint suggestions to all Haskell files in the folder
+#  	EXPERIMENTAL, PROBLEMATIC (e.g. DUPLICATES COMMENTS)
 autofix-all: install-apply-refact
 	@echo "Applying refactorings to all Haskell files..."
 	@find . -type f -name '*.hs' -exec $(MAKE) autofix-file file={} \;
