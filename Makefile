@@ -39,6 +39,10 @@ $(APPLY_REFACT):
 		echo "refactor is already installed."; \
 	fi
 
+# Target to run the linter, depends on install-hlint
+lint: install-hlint
+	$(HLINT) .
+
 # Target to automatically apply hlint suggestions to a specified file, depends on install-apply-refact
 # e.g.: 
 #	make autofix-file file=src/Mllib.hs
