@@ -17,8 +17,8 @@ jobs:
 
       - name: Install HLint (binary)
         run: |
-          curl -sSL https://github.com/ndmitchell/hlint/releases/download/v3.8/hlint-3.8-x86_64-linux.tar.gz | tar xz
-          mv hlint-3.8/hlint /usr/local/bin/
+          curl -sSL https://github.com/ndmitchell/hlint/releases/download/v3.6.1/hlint-3.6.1-x86_64-linux.tar.gz | tar xz
+          mv hlint-3.6.1/hlint /usr/local/bin/
 
       - name: Run HLint
         run: hlint --ignore-suggestions .
