@@ -23,10 +23,10 @@ minkowskiDistance p v1 v2 = (sumElements (cmap (**pc) (v1 - v2))) ** (1 / pc)
     pc = fromIntegral p
 
 chebyshevDistance :: Metric
-chebyshevDistance v1 v2 = maxElement $ cmap (abs) (v1 - v2)
+chebyshevDistance v1 v2 = maxElement $ cmap abs (v1 - v2)
 
 manhattanDistance :: Metric 
-manhattanDistance v1 v2 = sumElements $ cmap (abs) (v1 - v2)
+manhattanDistance v1 v2 = sumElements $ cmap abs (v1 - v2)
 
 -- TODO test all above
 

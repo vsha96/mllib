@@ -4,8 +4,8 @@ module Mllib.Types
 
 import Data.Tree as Reexport (Tree, Forest)
 
-import Numeric.LinearAlgebra.Data    as Reexport (fromList, toList, vector, size)
-import Numeric.LinearAlgebra.Data    as Reexport (Vector, R)
+import Numeric.LinearAlgebra.Data as Reexport
+    ( fromList, toList, vector, size, Vector, R )
 
 -- TODO: replace it
 import Numeric.LinearAlgebra.HMatrix as Reexport (norm_2)

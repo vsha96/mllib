@@ -18,7 +18,7 @@ spec = do
     -- fitting model
     knn = fitKNeighbors parameters x_train y
     -- tests
-    x_test0 = map vector [[1.1]]
+    x_test0 = [vector [1.1]]
     x_test1 = map vector [[-10], [-20]]
     x_test2 = map vector [[10], [20]]
 
