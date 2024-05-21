@@ -39,7 +39,7 @@ saveLabelsToCSV fileName list = do
     BSL.writeFile fileName $ encode ((-1) : list)
 
 convertToVector :: [TC.Record] -> [Vector R]
-convertToVector = map (fromList) . map (map toDouble)
+convertToVector = map fromList . map (map toDouble)
 
 toDouble :: String -> Double
 toDouble = read

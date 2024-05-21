@@ -158,11 +158,10 @@ assignIndices
     :: [Vector R] -- ^ Cluster centers
     -> [Vector R] -- ^ Vectors
     -> [Int]
-assignIndices clusterCenters list = 
+assignIndices clusterCenters = 
     map ((\listOfDists -> head $ elemIndices (minimum listOfDists) listOfDists) .
         zipWith euclideanDistance clusterCenters .
         replicate (length clusterCenters)) 
-        list
 
 
 

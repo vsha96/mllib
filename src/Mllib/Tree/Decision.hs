@@ -146,7 +146,7 @@ predict
     :: DecisionTree     -- ^ Fitted decision tree
     -> [Vector R]       -- ^ Vectors
     -> [Int]            -- ^ Predicted labels for vectors
-predict tree x = map (predictElem tree) x
+predict tree = map (predictElem tree)
 
 
 
@@ -228,7 +228,7 @@ possibleSplitsWithParams params list =
     minLen = minSamplesLeaf params
     len = length list
   in
-    [(take i list, drop i list) 
+    [ splitAt i list 
         | i <- [1..(len - 1)]
         , i >= minLen
         , (len - i) >= minLen
@@ -306,7 +306,7 @@ mode
 mode classes y = 
     fst $ last $ -- take class label of maximum
     -- TODO: solve problem with several maximums
-    sortOn (snd) -- sort by quantity
+    sortOn snd -- sort by quantity
     [(cl, length (filter (==cl) y)) | cl <- classes] -- take class label and make tuple with its quantity
 
 

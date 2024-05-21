@@ -15,9 +15,9 @@ spec = do
     -- fitting model
     tree = fitDecisionTree treeSetup (map vector x) y
     -- tests
-    x_test0 = map vector [[0]]
+    x_test0 = [vector [0]]
     x_test1 = map vector [[1.6], [3.3]]
-    x_test2 = map vector [[10]]
+    x_test2 = [vector [10]]
 
   describe "Decision Tree" $ do
     it "performs classification" $ do
