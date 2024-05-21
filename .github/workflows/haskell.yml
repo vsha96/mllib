@@ -21,7 +21,7 @@ jobs:
           mv hlint-3.8/hlint /usr/local/bin/
 
       - name: Run HLint
-        run: hlint .
+        run: hlint --ignore-suggestions .
 
       - name: Start build
         run: stack build

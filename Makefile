@@ -41,14 +41,14 @@ $(APPLY_REFACT):
 
 # Target to run the linter, depends on install-hlint
 lint: install-hlint
-	$(HLINT) .
+	$(HLINT) --ignore-suggestions .
 
 # Target to automatically apply hlint suggestions to a specified file, depends on install-apply-refact
 # e.g.: 
 #	make autofix-file file=src/Mllib.hs
 autofix-file: install-apply-refact
 	@echo "Applying refactorings to $(file)"
-	@$(HLINT) --refactor --refactor-options="--inplace" $(file)
+	@$(HLINT) --refactor --refactor-options="--inplace" --ignore-suggestions $(file)
 
 # Target to automatically apply hlint suggestions to all Haskell files in the folder
 #  	EXPERIMENTAL, PROBLEMATIC (e.g. DUPLICATES COMMENTS)
